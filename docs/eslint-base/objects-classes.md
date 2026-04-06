@@ -44,9 +44,7 @@ Use object shorthands (`{ a }` instead of `{ a: a }`) whenever possible. Also us
 If for some reason you need to declare a constructor in an object literal:
 
 ```ts
-const obj = {
-  SomeClass: function () {},
-};
+const obj = { SomeClass: function () {} };
 ```
 
 Consider either using a class declaration or a class expression instead.
@@ -168,11 +166,7 @@ Duplicate class members overwrite each other and is likely a mistake. Overloads 
 Duplicate keys in object literals overwrite each other and is likely a mistake. If you have some side effects that are hard to manage, consider evaluating all the side effects before creating the object literal.
 
 ```js
-const obj = {
-  a: doSomething(),
-  b: doSomethingElse(),
-  a: doAnotherThing(),
-};
+const obj = { a: doSomething(), b: doSomethingElse(), a: doAnotherThing() };
 ```
 
 ```ts

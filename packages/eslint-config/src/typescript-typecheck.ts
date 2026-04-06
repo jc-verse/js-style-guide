@@ -12,9 +12,7 @@ export default defineConfig({
     // https://jc-verse.github.io/js-style-guide/typescript/type-checked#consistent-type-exports
     "@typescript-eslint/consistent-type-exports": [
       "error",
-      {
-        fixMixedExportsWithInlineTypeSpecifier: true,
-      },
+      { fixMixedExportsWithInlineTypeSpecifier: true },
     ],
 
     // https://jc-verse.github.io/js-style-guide/typescript/type-checked#dot-notation
@@ -41,10 +39,7 @@ export default defineConfig({
 
     "@typescript-eslint/no-floating-promises": [
       "warn",
-      {
-        ignoreIIFE: false,
-        ignoreVoid: true,
-      },
+      { ignoreIIFE: false, ignoreVoid: true },
     ],
 
     "@typescript-eslint/no-for-in-array": "error",

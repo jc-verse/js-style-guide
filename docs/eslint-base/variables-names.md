@@ -309,11 +309,7 @@ We don't usually allow `var`s. When you do use them, put them at the top level o
 Until we fully use `@typescript-eslint/naming-convention`, we will still use this rule to enforce camelCase where possible. We don't check object properties because the object may be passed to a third-party library:
 
 ```ts
-checkESLint({
-  config: {
-    camel_case: true,
-  },
-});
+checkESLint({ config: { camel_case: true } });
 ```
 
 ### [`id-denylist`](https://eslint.org/docs/rules/id-denylist)
@@ -432,9 +428,7 @@ Don't access the `__proto__` property. Use `Object.getPrototypeOf` and `Object.s
 
 ```ts
 // Write this:
-const obj = {
-  __proto__: null,
-};
+const obj = { __proto__: null };
 
 // Instead of this:
 const obj = Object.create(null);

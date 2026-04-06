@@ -3,10 +3,7 @@ import reactPlugin from "eslint-plugin-react";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig({
-  plugins: {
-    "jsx-a11y": jsxA11yPlugin,
-    react: reactPlugin,
-  },
+  plugins: { "jsx-a11y": jsxA11yPlugin, react: reactPlugin },
   rules: {
     // JSX a11y rules are taken from airbnb, not adjusted yet
     "jsx-a11y/alt-text": [
@@ -128,11 +125,7 @@ export default defineConfig({
 
     "jsx-a11y/media-has-caption": [
       "error",
-      {
-        audio: [],
-        track: [],
-        video: [],
-      },
+      { audio: [], track: [], video: [] },
     ],
 
     "jsx-a11y/mouse-events-have-key-events": [
@@ -212,21 +205,12 @@ export default defineConfig({
 
     "jsx-a11y/no-noninteractive-tabindex": [
       "error",
-      {
-        allowExpressionValues: true,
-        roles: ["tabpanel"],
-        tags: [],
-      },
+      { allowExpressionValues: true, roles: ["tabpanel"], tags: [] },
     ],
 
     "jsx-a11y/no-onchange": "off",
 
-    "jsx-a11y/no-redundant-roles": [
-      "error",
-      {
-        nav: ["navigation"],
-      },
-    ],
+    "jsx-a11y/no-redundant-roles": ["error", { nav: ["navigation"] }],
 
     "jsx-a11y/no-static-element-interactions": [
       "error",
@@ -384,12 +368,7 @@ export default defineConfig({
     // The original text allows for things like spellchecking and searching
     "react/no-unescaped-entities": "off",
 
-    "react/no-unknown-property": [
-      "error",
-      {
-        requireDataLowercase: true,
-      },
-    ],
+    "react/no-unknown-property": ["error", { requireDataLowercase: true }],
 
     "react/self-closing-comp": ["error", { component: true, html: true }],
 

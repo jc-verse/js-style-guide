@@ -2,9 +2,7 @@ import importPlugin from "eslint-plugin-import-x";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig({
-  plugins: {
-    "import-x": importPlugin,
-  },
+  plugins: { "import-x": importPlugin },
   rules: {
     // We use @typescript-eslint/no-import-type-side-effects
     "import-x/consistent-type-specifier-style": "off",
@@ -134,9 +132,7 @@ export default defineConfig({
   },
   settings: {
     "import-x/resolver": {
-      node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".mjs"],
-      },
+      node: { extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".mjs"] },
     },
   },
 });

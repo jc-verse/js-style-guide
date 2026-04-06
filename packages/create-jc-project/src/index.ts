@@ -45,16 +45,8 @@ const { name, description, usingReact } = parseValidRes(
           return true;
         },
       },
-      {
-        type: "text",
-        name: "description",
-        message: "Brief description?",
-      },
-      {
-        type: "confirm",
-        name: "usingReact",
-        message: "Using React?",
-      },
+      { type: "text", name: "description", message: "Brief description?" },
+      { type: "confirm", name: "usingReact", message: "Using React?" },
     ],
     { onCancel: () => process.exit(0) },
   ),
@@ -65,17 +57,12 @@ const packageJSON = {
   version: "0.0.0",
   author: "Joshua Chen <sidachen2003@gmail.com>",
   license: "MIT",
-  publishConfig: {
-    access: "public",
-    registry: "https://registry.npmjs.org",
-  },
+  publishConfig: { access: "public", registry: "https://registry.npmjs.org" },
   repository: {
     type: "git",
     url: `git+https://github.com/jc-verse/${name}.git`,
   },
-  bugs: {
-    url: `https://github.com/jc-verse/${name}/issues`,
-  },
+  bugs: { url: `https://github.com/jc-verse/${name}/issues` },
   homepage: `https://jc-verse.github.io/${name}/`,
   scripts: {
     format: "prettier -w .",

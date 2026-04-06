@@ -27,9 +27,7 @@ export default defineConfig({
     "arrow-body-style": [
       "error",
       "as-needed",
-      {
-        requireReturnForObjectLiteral: false,
-      },
+      { requireReturnForObjectLiteral: false },
     ],
 
     // We forbid using var altogether.

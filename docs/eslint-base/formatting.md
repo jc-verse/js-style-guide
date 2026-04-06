@@ -75,11 +75,7 @@ if (doX()) {
 However, omitting curly braces when the body is multi-line could quickly make the code lose focus, as is this example:
 
 ```ts
-if (!foo)
-  foo = {
-    bar: 1,
-    qux: 2,
-  }; // Where does the block end? Where does the assignment end?
+if (!foo) foo = { bar: "some a lot of text", qux: "some another lots of text" }; // Where does the block end? Where does the assignment end?
 ```
 
 ## Comments

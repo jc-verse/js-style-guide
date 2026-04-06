@@ -14,14 +14,9 @@ const config = {
       "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
-        docs: {
-          path: "../docs",
-          routeBasePath: "/",
-        },
+        docs: { path: "../docs", routeBasePath: "/" },
         blog: false,
-        theme: {
-          customCss: require.resolve("./src/css/custom.css"),
-        },
+        theme: { customCss: require.resolve("./src/css/custom.css") },
       }),
     ],
     [
@@ -29,9 +24,7 @@ const config = {
       {
         vfsRoot: process.cwd(),
         themes: ["github-light", "github-dark"],
-        defaultCompilerOptions: {
-          types: ["node"],
-        },
+        defaultCompilerOptions: { types: ["node"] },
       },
     ],
   ],
@@ -47,12 +40,7 @@ const config = {
           srcDark: "img/logo.svg",
         },
         items: [
-          {
-            type: "doc",
-            docId: "guide",
-            position: "left",
-            label: "Tutorial",
-          },
+          { type: "doc", docId: "guide", position: "left", label: "Tutorial" },
           {
             href: "https://github.com/jc-verse/js-style-guide",
             label: "GitHub",
@@ -69,9 +57,7 @@ const config = {
         },
         copyright: `Copyright © ${new Date().getFullYear()} JC-verse. Built with Docusaurus.`,
       },
-      tableOfContents: {
-        maxHeadingLevel: 4,
-      },
+      tableOfContents: { maxHeadingLevel: 4 },
     }),
 };
 

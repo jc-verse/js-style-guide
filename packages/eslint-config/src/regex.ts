@@ -2,9 +2,7 @@ import regexPlugin from "eslint-plugin-regexp";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig({
-  plugins: {
-    regexp: regexPlugin,
-  },
+  plugins: { regexp: regexPlugin },
   rules: {
     "regexp/confusing-quantifier": "error",
 
@@ -104,12 +102,7 @@ export default defineConfig({
 
     "regexp/no-trivially-nested-quantifier": "error",
 
-    "regexp/no-unused-capturing-group": [
-      "warn",
-      {
-        allowNamed: false,
-      },
-    ],
+    "regexp/no-unused-capturing-group": ["warn", { allowNamed: false }],
 
     "regexp/no-useless-assertions": "error",
 
@@ -212,11 +205,7 @@ export default defineConfig({
       {
         generalCategory: "never",
         key: "short",
-        property: {
-          binary: "long",
-          generalCategory: "long",
-          script: "long",
-        },
+        property: { binary: "long", generalCategory: "long", script: "long" },
       },
     ],
 

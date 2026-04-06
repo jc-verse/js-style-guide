@@ -21,10 +21,7 @@ function expandConfig(
 ): ConfigWithExtendsArray {
   if (enabled === true) return config;
   if (!enabled) return [];
-  return config.map((v) => ({
-    files: enabled,
-    ...v,
-  }));
+  return config.map((v) => ({ files: enabled, ...v }));
 }
 
 export default function configCreator({
@@ -42,13 +39,8 @@ export default function configCreator({
 } = {}): ConfigWithExtendsArray {
   return defineConfig(
     {
-      linterOptions: {
-        reportUnusedDisableDirectives: true,
-      },
-      languageOptions: {
-        ecmaVersion: "latest",
-        parser: tseslintParser,
-      },
+      linterOptions: { reportUnusedDisableDirectives: true },
+      languageOptions: { ecmaVersion: "latest", parser: tseslintParser },
     },
     prettierRules,
     ...baseRules,

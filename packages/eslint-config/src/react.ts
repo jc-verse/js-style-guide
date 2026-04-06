@@ -4,12 +4,7 @@ import { defineConfig } from "eslint/config";
 import globals from "globals";
 
 export default defineConfig({
-  languageOptions: {
-    globals: {
-      ...globals.browser,
-      ...globals.node,
-    },
-  },
+  languageOptions: { globals: { ...globals.browser, ...globals.node } },
   plugins: {
     react: reactPlugin,
     // @ts-expect-error: TODO
@@ -131,10 +126,5 @@ export default defineConfig({
     // Also checked by TypeScript
     "react/style-prop-object": "error",
   },
-  settings: {
-    react: {
-      pragma: "React",
-      version: "18",
-    },
-  },
+  settings: { react: { pragma: "React", version: "18" } },
 });

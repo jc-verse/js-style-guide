@@ -234,11 +234,7 @@ More favorably, _only_ use switch-case if the matched value has a finite range (
 
 ```ts twoslash
 type Res =
-  | {
-      code: 200;
-      body: string;
-      error: never;
-    }
+  | { code: 200; body: string; error: never }
   | { code: number; error: string; body: never };
 
 function handleResponse(res: Res) {

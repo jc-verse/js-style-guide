@@ -23,10 +23,7 @@ To get everything configured, you need the following files:
 <TabItem value=".eslintrc">
 
 ```json title=".eslintrc"
-{
-  "root": true,
-  "extends": ["jc"]
-}
+{ "root": true, "extends": ["jc"] }
 ```
 
 </TabItem>
@@ -141,11 +138,7 @@ We want our code to span as little area as possible, given the same set of forma
 As a simple example, instead of this:
 
 ```ts
-const parseResult = {
-  fileName,
-  path,
-  extension,
-};
+const parseResult = { fileName, path, extension };
 ```
 
 Prefer this:

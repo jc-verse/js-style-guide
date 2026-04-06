@@ -14,8 +14,6 @@
       "@docusaurus/module-type-aliases",
       "@docusaurus/theme-classic"
     ],
-    "paths": {
-      "@site/*": ["./*"]
-    }
+    "paths": { "@site/*": ["./*"] }
   }
 }

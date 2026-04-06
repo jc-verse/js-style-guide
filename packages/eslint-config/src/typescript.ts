@@ -103,10 +103,7 @@ export default defineConfig(
       // https://jc-verse.github.io/js-style-guide/typescript/base#no-empty-object-type
       "@typescript-eslint/no-empty-object-type": [
         "warn",
-        {
-          allowInterfaces: "with-single-extends",
-          allowObjectTypes: "never",
-        },
+        { allowInterfaces: "with-single-extends", allowObjectTypes: "never" },
       ],
 
       // https://jc-verse.github.io/js-style-guide/typescript/base#no-explicit-any

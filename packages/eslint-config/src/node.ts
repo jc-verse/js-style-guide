@@ -3,15 +3,8 @@ import { defineConfig } from "eslint/config";
 import globals from "globals";
 
 export default defineConfig({
-  languageOptions: {
-    globals: {
-      ...globals.node,
-      ...globals.nodeBuiltin,
-    },
-  },
-  plugins: {
-    n: nPlugin,
-  },
+  languageOptions: { globals: { ...globals.node, ...globals.nodeBuiltin } },
+  plugins: { n: nPlugin },
   rules: {
     // Callback-related
     "n/callback-return": "off",

@@ -108,17 +108,13 @@ Use template literals instead of string concatenation. It's more readable and le
 There are many ways to represent the same regular expression. Instead of this:
 
 ```ts
-const rule = {
-  test: /\.(?:js|ts|jsx|tsx)/i,
-};
+const rule = { test: /\.(?:js|ts|jsx|tsx)/i };
 ```
 
 Prefer this:
 
 ```ts
-const rule = {
-  test: /\.[jt]sx?/i,
-};
+const rule = { test: /\.[jt]sx?/i };
 ```
 
 Regular expressions are _not_ intended to be readable; they are designed for machine consumption. Convey the intent of a regular expression through test cases, not through making it verbose. Related to **code for the average-intelligent**.

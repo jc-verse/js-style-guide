@@ -6,6 +6,7 @@ module.exports = {
   singleQuote: false,
   quoteProps: "as-needed",
   jsxSingleQuote: false,
+  objectWrap: "collapse",
   trailingComma: "all",
   bracketSpacing: true,
   bracketSameLine: true,
