@@ -115,7 +115,7 @@ bun lint-staged --allow-empty
 Then, you need to install some dependencies:
 
 ```bash
-bun add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser cspell eslint eslint-config-jc eslint-plugin-header eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks husky lint-staged prettier prettier-config-jc tsconfig-jc typescript
+bun add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser cspell eslint eslint-config-jc eslint-plugin-header eslint-plugin-import-x eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks husky lint-staged prettier prettier-config-jc tsconfig-jc typescript
 ```
 
 That's a lot of things to do. Fear not—we have a scaffolding utility to set everything up. Run:

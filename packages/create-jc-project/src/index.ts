@@ -132,7 +132,7 @@ const dependencies = [
   "eslint",
   "eslint-config-jc",
   "eslint-plugin-header",
-  "eslint-plugin-import",
+  "eslint-plugin-import-x",
   "husky",
   "lint-staged",
   "prettier",

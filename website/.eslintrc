@@ -1,6 +1,6 @@
 {
   "rules": {
-    "import/no-unresolved": [
+    "import-x/no-unresolved": [
       "error",
       {
         "ignore": ["^@theme", "^@docusaurus", "^@generated", "^@site"]

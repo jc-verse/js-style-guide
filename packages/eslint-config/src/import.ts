@@ -1,138 +1,139 @@
-import importPlugin from "eslint-plugin-import";
+import importPlugin from "eslint-plugin-import-x";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig({
   plugins: {
-    import: importPlugin,
+    "import-x": importPlugin,
   },
   rules: {
     // We use @typescript-eslint/no-import-type-side-effects
-    "import/consistent-type-specifier-style": "off",
+    "import-x/consistent-type-specifier-style": "off",
 
     // This rule reports when using esModuleInterop
-    "import/default": "off",
+    "import-x/default": "off",
 
     // Enable if you use Webpack
-    "import/dynamic-import-chunkname": 0,
+    "import-x/dynamic-import-chunkname": 0,
 
-    "import/enforce-node-protocol-usage": ["error", "always"],
+    "import-x/export": "error",
 
-    "import/export": "error",
+    "import-x/exports-last": "off",
 
-    "import/exports-last": "off",
+    "import-x/extensions": "off",
 
-    "import/extensions": "off",
-
-    "import/first": ["error", "absolute-first"],
+    "import-x/first": ["error", "absolute-first"],
 
     // We want the opposite style
-    "import/group-exports": "off",
+    "import-x/group-exports": "off",
 
-    "import/max-dependencies": "off",
-
-    // Performance
-    "import/named": "off",
+    "import-x/max-dependencies": "off",
 
     // Performance
-    "import/namespace": "off",
+    "import-x/named": "off",
 
-    "import/newline-after-import": [
+    // Performance
+    "import-x/namespace": "off",
+
+    "import-x/newline-after-import": [
       "error",
       { considerComments: true, count: 1, exactCount: true },
     ],
 
     // Don't do absolute, even when authoring modules directly sent to browsers!
-    "import/no-absolute-path": [
+    "import-x/no-absolute-path": [
       "error",
       { amd: true, commonjs: true, esmodule: true },
     ],
 
     // We don't use AMD
-    "import/no-amd": "error",
+    "import-x/no-amd": "error",
 
     // Anonymous functions/classes are already covered by func-names
-    "import/no-anonymous-default-export": "off",
+    "import-x/no-anonymous-default-export": "off",
 
-    "import/no-commonjs": "off",
+    "import-x/no-commonjs": "off",
 
     // Performance, and cycles are generally not an issue until they are
-    "import/no-cycle": "off",
+    "import-x/no-cycle": "off",
 
     // Please use default export for React components
-    "import/no-default-export": "off",
+    "import-x/no-default-export": "off",
 
-    "import/no-deprecated": "off",
+    "import-x/no-deprecated": "off",
 
-    "import/no-duplicates": [
+    "import-x/no-duplicates": [
       "error",
       { considerQueryString: true, "prefer-inline": true },
     ],
 
-    "import/no-dynamic-require": "off",
+    "import-x/no-dynamic-require": "off",
 
-    "import/no-empty-named-blocks": "error",
+    "import-x/no-empty-named-blocks": "error",
 
-    "import/no-extraneous-dependencies": [
+    "import-x/no-extraneous-dependencies": [
       "error",
       {
         bundledDependencies: false,
-        devDependencies: ["**/*.test.{js,ts,jsx,tsx}"],
+        devDependencies: [
+          "**/*.test.{js,ts,jsx,tsx}",
+          "**/eslint.config.{js,ts,mjs,mts}",
+        ],
         optionalDependencies: false,
         peerDependencies: true,
       },
     ],
 
     // If you have to do this, it must be for some weird reason
-    "import/no-import-module-exports": "warn",
+    "import-x/no-import-module-exports": "warn",
 
-    "import/no-internal-modules": "off",
+    "import-x/no-internal-modules": "off",
 
     // The only reason to use this is when the environment doesn't handle this
     // compliantly
-    "import/no-mutable-exports": "off",
+    "import-x/no-mutable-exports": "off",
 
     // Performance
-    "import/no-named-as-default": "off",
+    "import-x/no-named-as-default": "off",
 
     // Performance
-    "import/no-named-as-default-member": "off",
+    "import-x/no-named-as-default-member": "off",
 
-    "import/no-named-default": "error",
+    "import-x/no-named-default": "error",
 
-    "import/no-named-export": "off",
+    "import-x/no-named-export": "off",
 
-    "import/no-namespace": "off",
+    "import-x/no-namespace": "off",
 
-    "import/no-nodejs-modules": "off",
+    "import-x/no-nodejs-modules": "off",
 
-    "import/no-relative-packages": "warn",
+    "import-x/no-relative-packages": "warn",
 
-    "import/no-relative-parent-imports": "off",
+    "import-x/no-relative-parent-imports": "off",
 
-    "import/no-restricted-paths": 0,
+    "import-x/no-restricted-paths": 0,
 
-    "import/no-self-import": "error",
+    "import-x/no-self-import": "error",
 
-    "import/no-unassigned-import": "off",
+    "import-x/no-unassigned-import": "off",
 
-    "import/no-unresolved": "off",
+    "import-x/no-unresolved": "off",
 
-    "import/no-unused-modules": 0,
+    "import-x/no-unused-modules": 0,
 
     // Going one directory above ensures transpilation doesn't mess with paths
-    "import/no-useless-path-segments": "off",
+    "import-x/no-useless-path-segments": "off",
 
     // When we use it, it's useful.
-    "import/no-webpack-loader-syntax": "off",
+    "import-x/no-webpack-loader-syntax": "off",
 
-    "import/order": 0,
+    "import-x/order": 0,
 
-    "import/prefer-default-export": "off",
+    "import-x/prefer-default-export": "off",
 
-    "import/unambiguous": "off",
+    "import-x/unambiguous": "off",
   },
   settings: {
-    "import/resolver": {
+    "import-x/resolver": {
       node: {
         extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".mjs"],
       },

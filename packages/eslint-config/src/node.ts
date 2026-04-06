@@ -37,10 +37,10 @@ export default defineConfig({
 
     "n/no-exports-assign": "error",
 
-    // Shadowed by import/no-extraneous-dependencies
+    // Shadowed by import-x/no-extraneous-dependencies
     "n/no-extraneous-import": "off",
 
-    // Shadowed by import/no-extraneous-dependencies
+    // Shadowed by import-x/no-extraneous-dependencies
     "n/no-extraneous-require": "off",
 
     // Checked by TypeScript
