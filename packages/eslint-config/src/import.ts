@@ -1,7 +1,7 @@
 import importPlugin from "eslint-plugin-import";
-import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
 
-export default tseslint.config({
+export default defineConfig({
   plugins: {
     import: importPlugin,
   },
@@ -14,6 +14,8 @@ export default tseslint.config({
 
     // Enable if you use Webpack
     "import/dynamic-import-chunkname": 0,
+
+    "import/enforce-node-protocol-usage": ["error", "always"],
 
     "import/export": "error",
 

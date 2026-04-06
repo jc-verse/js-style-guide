@@ -1,9 +1,9 @@
 import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
-import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
 
-export default tseslint.config({
+export default defineConfig({
   languageOptions: {
     globals: {
       ...globals.browser,
@@ -12,6 +12,7 @@ export default tseslint.config({
   },
   plugins: {
     react: reactPlugin,
+    // @ts-expect-error: TODO
     "react-hooks": reactHooksPlugin,
   },
   rules: {
@@ -41,7 +42,8 @@ export default tseslint.config({
 
     "react/forbid-elements": 0,
 
-    "react/forward-ref-uses-ref": "error",
+    // No longer necessary; forwardRef is deprecated
+    "react/forward-ref-uses-ref": "off",
 
     // Note that it false-positives for `const Foo: Comp = () => <></>`
     "react/function-component-definition": [

@@ -120,5 +120,7 @@ function findAsyncSequential<T>(arr: T[], matcher: (a: T) => Promise<boolean>) {
 ### [`require-atomic-updates`](https://eslint.org/docs/rules/require-atomic-updates)
 
 - Severity: warning
+- Configuration:
+  - Do not special-case property assignment because the async operation may modify any property (`allowProperties: false`)
 
 You should generally avoid side effects. When side effects are unavoidable, make sure that only one function is able to update the variable. This rule is helpful, but there can be false-positives, because it can only enforce defensive coding but not locate any actual offenders.

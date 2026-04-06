@@ -73,8 +73,8 @@ See [`no-self-assign`](#no-self-assign). If you want to test for `NaN`, use `Num
 
 - Severity: error
 - Configuration:
-  - Do not write `case NaN` (`"enforceForSwitchCase": true`)
-  - Do not write `.indexOf(NaN)` (`"enforceForIndexOf": true`)
+  - Do not write `case NaN` (`enforceForSwitchCase: true`)
+  - Do not write `.indexOf(NaN)` (`enforceForIndexOf: true`)
 
 `NaN` never compares equal to anything, so `x === NaN` is likely a mistake. Other cases where `===` semantics is used, including `switch-case` and `indexOf`, should also not compare against `NaN`. Use `Number.isNaN` instead.
 
@@ -105,9 +105,9 @@ There's no exception to this rule. We turn off the `noPropertyAccessFromIndexSig
 
 - Severity: error
 - Configuration:
-  - Require capitalized names to be called with `new` (`"capIsNew": true`)
-  - Require `new` to only be called on capitalized names (`"newIsCap": true`)
-  - Check properties too (`"properties": true`)
+  - Do not require capitalized names to be called with `new` (`capIsNew: false`)
+  - Require `new` to only be called on capitalized names (`newIsCap: true`)
+  - Check properties too (`properties: true`)
 
 This is purely a stylistic choice. Use capital iff you have a constructor. This is also checked by `naming-convention`. If you are using constructors generically, still use uppercase:
 
@@ -261,7 +261,7 @@ In such cases, you can either disable the rule, or use an explicit equality chec
 
 - Severity: error
 - Configuration:
-  - Disallow all multiple assignments (`"ignoreNonDeclaration": false`)
+  - Disallow all multiple assignments (`ignoreNonDeclaration: false`)
 
 Do not chain assignments (`a = b = c = 1`). This is because Prettier will add parentheses, which makes the assignment not a "chain" anyway. Write multiple lines instead.
 
@@ -283,7 +283,7 @@ Again, you should not rely on the return value of assignments. If you have somet
 
 - Severity: error
 - Configuration:
-  - Disallow all self-assignments (`"props": true`)
+  - Disallow all self-assignments (`props: true`)
 
 Self-assignments are usually a no-op. Self-assignment to properties could be no-op but the case where it's not is very confusing to readers. If your property accessor is not idempotent, you should probably refactor it. If this API comes from a library, use a comment.
 
@@ -321,6 +321,8 @@ Many "idioms" do not lead to correct or fool-proof code. The common case of `"" 
 ### [`no-sequences`](https://eslint.org/docs/rules/no-sequences)
 
 - Severity: error
+- Configuration:
+  - Disallow all comma operators (`allowInParentheses: false`)
 
 Don't use the comma operator unless in the updater of a `for` loop. Write multiple expressions using multiple statements.
 

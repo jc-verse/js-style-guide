@@ -154,11 +154,10 @@ Do not write constructors that are empty or only call `super()`. Such constructo
 
 - Severity: error
 - Related:
-  - [`@typescript-eslint/no-dupe-class-members`](../typescript/base.md#no-dupe-class-members)
   - `ts(2300): Duplicate identifier 'a'.`
   - `ts(2393): Duplicate function implementation.`
 
-Duplicate class members overwrite each other and is likely a mistake. In TypeScript, you will want to use the extension rule in order to allow overloads.
+Duplicate class members overwrite each other and is likely a mistake. Overloads are irrelevant to this rule.
 
 ### [`no-dupe-keys`](https://eslint.org/docs/rules/no-dupe-keys)
 

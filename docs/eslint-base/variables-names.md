@@ -17,7 +17,6 @@ Because `var`s are forbidden altogether, this rule is mostly moot. In the rare c
 ### [`init-declarations`](https://eslint.org/docs/rules/init-declarations)
 
 - Severity: error
-- Disabled by the [typescript](../typescript/base.md) config
 - Configuration:
   - Require variables to be initialized (`"always"`)
 - Related:
@@ -51,6 +50,22 @@ const a = 1;
 a = 2; // -> TypeError: Assignment to constant variable.
 ```
 
+### [`no-empty-pattern`](https://eslint.org/docs/rules/no-empty-pattern)
+
+- Severity: error
+- Options:
+  - Disallow empty patterns in parameters (`allowObjectPatternsAsParameters: false`)
+
+Empty destructuring patterns don't create any variables. If you intend to drop the property entirely, just write it directly, since [`no-unused-vars`](#no-unused-vars) allows unused variables as rest siblings.
+
+```ts
+// Instead of this:
+function foo({ a: {}, ...props }: Props) {}
+
+// Write this:
+function foo({ a, ...props }: Props) {}
+```
+
 ### [`no-implicit-globals`](https://eslint.org/docs/rules/no-implicit-globals)
 
 - Severity: error
@@ -76,6 +91,8 @@ Do not redeclare `var`/`function`. This is probably a mistake. Note that `let`/`
   - Ignore shadowing of globals (`builtinGlobals: true`)
   - Check shadowing of all variables declared in the outer scope (`hoist: "all"`)
   - Allow shadowing of uninitialized variables (`ignoreOnInitialization: true`)
+  - Do not allow function type parameter name to shadow another variable (`ignoreFunctionTypeParameterNameValueShadow: false`)
+  - Ignore type declarations and value declarations shadowing each other (`ignoreTypeValueShadowing: true`)
 
 We avoid shadowing because doing so is a refactoring hazard.
 
@@ -114,6 +131,19 @@ const x = (() => {
 
 We allow shadowing globals—this is for a pragmatic concern. There are some extremely generically named globals like `name` and `Plugin` which we don't want to prevented from being used as local variables. However, you should probably avoid using names like `fetch`.
 
+We allow type declarations and value declarations to shadow each other. This is because they are in different namespaces and you always access each one with a different syntax. However, a function parameter name always lives in value space even when it belongs in a type, so we don't allow it to shadow another variable.
+
+```ts
+const test = 1;
+type Func = (test: string) => typeof test; // What is `test` here?
+```
+
+### [`no-unassigned-vars`](https://eslint.org/docs/rules/no-unassigned-vars)
+
+- Severity: error
+
+The [`init-declarations`](#init-declarations) rule already requires variables to be initialized. In cases where you do want the variable to be initialized later, this rule prevents you from accidentally forgetting to initialize it at all. It requires the variable to be eventually assigned somewhere, although it doesn't guarantee that the assignment happens before the variable is used, or the assignment executes at all.
+
 ### [`no-var`](https://eslint.org/docs/rules/no-var)
 
 We disallow `var` statements. `var` is fully predated by `let`/`const` and its hoisting behavior makes code harder to debug. There's not a single reason to use `var` today. If you need to share one variable between two blocks, declare it in the upper scope. If you need to declare a global variable (which you probably shouldn't anyway), directly modify `globalThis` (which also works in modules).
@@ -135,7 +165,9 @@ We _require_ variables to be initialized (through `init-declarations`). In case 
 - Configuration:
   - Check unused trailing function parameters (`args: "after-used"`)
   - Check unused caught errors (`caughtErrors: "all"`)
+  - Check unused classes containing static initialization blocks (`ignoreClassWithStaticInitBlock: false`)
   - Ignore unused variables with rest element (`ignoreRestSiblings: true`)
+  - Check unused `using` declarations (`ignoreUsingDeclarations: false`)
   - Check unused variables in the top-level scope (`vars: "all"`)
 - Related:
   - [`@typescript-eslint/no-unused-vars`](../typescript/base.md#no-unused-vars)
@@ -165,13 +197,20 @@ try {
 }
 ```
 
+This rule also flags classes with static initialization blocks. If your class's sole purpose is to run the initialization block, lift the block out of the class as normal code.
+
+This rule also flags unused `using` variables. If you only intend for the resource to be disposed but not used, use a disable comment and wait for the [discard binding](https://github.com/tc39/proposal-discard-binding) proposal.
+
 ### [`no-use-before-define`](https://eslint.org/docs/rules/no-use-before-define)
 
 - Severity: warning
 - Configuration:
   - Allow export declarations before declarations (`allowNamedExports: false`)
   - Check class declarations (`classes: true`)
-  - Allow function declarations to be hoisted (`functions: true`)
+  - Check use-before-define enums (`enums: true`)
+  - Allow function declarations to be hoisted (`functions: false`)
+  - Allow referencing anything in type space (`ignoreTypeReferences: true`)
+  - Allow all type declarations to be hoisted (`typedefs: false`)
   - Check variable declarations (`variables: true`)
 
 You should generally avoid using variables before they are declared, as doing so leads to an error. For functions, you are free to let them get hoisted. In fact, we recommend the following style:
@@ -198,6 +237,8 @@ function foo() {
 foo(); // Should not work
 const x = 1;
 ```
+
+Because types behave like functions, they are safe to be referenced everywhere. However, when enums are used as values, they are not hoisted. This is also checked by TypeScript.
 
 ### [`no-useless-assignment`](https://eslint.org/docs/rules/no-useless-assignment)
 
@@ -296,8 +337,10 @@ This rule is fully covered by `@typescript-eslint/naming-convention`.
 ### [`no-shadow-restricted-names`](https://eslint.org/docs/rules/no-shadow-restricted-names)
 
 - Severity: error
+- Configuration:
+  - Do not allow `globalThis` (`reportGlobalThis: true`)
 
-Don't declare a binding called `undefined`, `NaN`, `Infinity`, `eval`, or `arguments`. You know exactly what values they represent.
+Don't declare a binding called `reportGlobalThis`, `undefined`, `NaN`, `Infinity`, `eval`, or `arguments`. You know exactly what values they represent.
 
 ### [`no-underscore-dangle`](https://eslint.org/docs/rules/no-underscore-dangle)
 

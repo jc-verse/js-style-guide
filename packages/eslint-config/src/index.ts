@@ -1,6 +1,6 @@
-import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
+import type { ConfigWithExtendsArray } from "@eslint/config-helpers";
 import tseslintParser from "@typescript-eslint/parser";
-import type { TSESLint } from "@typescript-eslint/utils";
 import prettierRules from "eslint-config-prettier";
 
 import baseRules from "./base.js";
@@ -16,9 +16,9 @@ import reactClassCompRules from "./react-class-comps.js";
 import reactPropTypesRules from "./react-prop-types.js";
 
 function expandConfig(
-  config: TSESLint.FlatConfig.ConfigArray,
+  config: ConfigWithExtendsArray,
   enabled: undefined | boolean | (string[] | string)[],
-): TSESLint.FlatConfig.ConfigArray {
+): ConfigWithExtendsArray {
   if (enabled === true) return config;
   if (!enabled) return [];
   return config.map((v) => ({
@@ -39,8 +39,8 @@ export default function configCreator({
   node?: boolean | (string[] | string)[];
   reactClassComp?: boolean | (string[] | string)[];
   reactPropTypes?: boolean | (string[] | string)[];
-} = {}): TSESLint.FlatConfig.ConfigArray {
-  return tseslint.config(
+} = {}): ConfigWithExtendsArray {
+  return defineConfig(
     {
       linterOptions: {
         reportUnusedDisableDirectives: true,

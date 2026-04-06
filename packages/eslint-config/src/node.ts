@@ -1,8 +1,8 @@
 import nPlugin from "eslint-plugin-n";
-import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
 
-export default tseslint.config({
+export default defineConfig({
   languageOptions: {
     globals: {
       ...globals.node,
@@ -10,7 +10,6 @@ export default tseslint.config({
     },
   },
   plugins: {
-    // @ts-expect-error: TODO make an issue
     n: nPlugin,
   },
   rules: {
@@ -68,6 +67,9 @@ export default tseslint.config({
 
     "n/no-sync": ["warn", { allowAtRootLevel: false }],
 
+    // Only useful if this file is intended to be required
+    "n/no-top-level-await": "off",
+
     "n/no-unpublished-bin": "error",
 
     "n/no-unpublished-import": "off",
@@ -78,11 +80,15 @@ export default tseslint.config({
 
     "n/prefer-global/console": ["error", "always"],
 
+    "n/prefer-global/crypto": ["error", "always"],
+
     "n/prefer-global/process": ["error", "always"],
 
     "n/prefer-global/text-decoder": ["error", "always"],
 
     "n/prefer-global/text-encoder": ["error", "always"],
+
+    "n/prefer-global/timers": ["error", "always"],
 
     "n/prefer-global/url": ["error", "always"],
 

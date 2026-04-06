@@ -1,7 +1,7 @@
 import regexPlugin from "eslint-plugin-regexp";
-import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
 
-export default tseslint.config({
+export default defineConfig({
   plugins: {
     regexp: regexPlugin,
   },

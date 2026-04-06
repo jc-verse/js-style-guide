@@ -7,7 +7,7 @@ This is designed to be a replacement for `eslint:recommended`, `plugin:react-hoo
 ## Installation
 
 ```sh
-yarn add -D eslint-config-jc
+bun add -D eslint-config-jc
 ```
 
 No need to install any other plugins. You should probably also have the following dependencies:

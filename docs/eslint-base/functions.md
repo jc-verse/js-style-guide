@@ -89,12 +89,15 @@ Keep in mind that refactoring doesn't only mean changing the implementations of 
 - Configuration:
   - Use function declaration over function expression (`"declaration"`)
   - Allow arrow functions when using expressions (`allowArrowFunctions: true`)
+  - Disallow type-annotated function expressions (`allowTypeAnnotation: false`)
 
 We allow two kinds of functions: function declarations and arrow functions. There are some additional restrictions:
 
 - At the top level, do not use `const func = () => ...`. Always use `function func() { ... }`, unless you need to type the function as a whole. This makes the code visually more balanced. This restriction is relaxed in nested functions (especially event listeners in React components).
 - We allow function expressions in the rare case of declaring extra methods, such as `Foo.prototype.bar = function () { ... }`. This should be exceedingly rare but they are allowed by the rule nonetheless. However, if the "method" doesn't rely on `this`, prefer using arrow functions.
 - To declare function properties in an object literal, use the method syntax `{ foo() { ... } }` instead of arrow functions `{ foo: () => ... }` to make it appear shorter. Exceptions are allowed if using arrow functions allows using concise body which saves lines. This is enforced by [`object-shorthand`](./objects-classes.md#object-shorthand).
+
+Do not use the syntax `const foo: Type = function () { ... }`; still prefer the arrow function syntax `const foo: Type = () => ...` if you need to type the function as a whole. In the rare case where the function needs to be named or uses `this`, use a function expression and disable the rule.
 
 ### [`no-func-assign`](https://eslint.org/docs/rules/no-func-assign)
 
@@ -147,6 +150,8 @@ In the same vein as `func-name-matching`, this rule is to ensure the readability
 - Severity: warning
 - Configuration:
   - Always require the function expression's name to match the variable it's assigned to. (`"always"`)
+  - Check function expressions used in property descriptors (`considerPropertyDescriptor: true`)
+  - Allow CommonJS exports to be named differently (`includeCommonJSModuleExports: false`)
 
 Although we rarely use function expressions and always prefer either arrow functions or declarations, in cases where function expressions are necessary, the variable name should match the name of declaration. It's mostly to ensure that the error stack is always as expected: the variable name does not appear in the stack trace and may result in obscure call stacks.
 
@@ -187,21 +192,19 @@ See our opinion on [complexity](./control-flow.md#complexity).
 ### [`no-empty-function`](https://eslint.org/docs/rules/no-empty-function)
 
 - Severity: off
-- Related:
-  - `@typescript-eslint/no-empty-function`
 
 We allow empty functions, because they are frequently needed for no-op callbacks.
 
 ## Parameters & arguments
 
-### [`default-param-last`](https://eslint.org/docs/rules/default-param-last)
+### [`default-param-last`](https://typescript-eslint.io/rules/default-param-last)
 
-- Severity: off
+- Severity: error
+- Disabled in JavaScript
 - Related:
-  - [`@typescript-eslint/default-param-last`](../typescript/base.md#default-param-last)
   - `ts(1016): A required parameter cannot follow an optional parameter.`
 
-The base rule has too many false positives because in many cases, the parameters following the "default" are optional too, just without defaults. Even in JavaScript, we would use TS declarations to make sure we author sane APIs.
+In TypeScript files, we require default parameters to be at the end of the parameter list. This is because required parameters must be passed values, so optional parameters before them have no effect and should just have `| undefined` in their types. In JavaScript, we don't require this because it is not possible to indicate optionality except through default values.
 
 ### [`max-params`](https://eslint.org/docs/rules/max-params)
 
@@ -222,6 +225,7 @@ From the ESLint docs:
 - Severity: error
 - Related:
   - `SyntaxError: Duplicate parameter name not allowed in this context`
+  - `ts(2300): Duplicate identifier 'a'.`
 
 Duplicate parameter names are a syntax error in strict mode.
 
@@ -360,10 +364,8 @@ You should only use `bind` (with one argument) when the `this` value is actually
 ### [`no-invalid-this`](https://eslint.org/docs/rules/no-invalid-this)
 
 - Severity: off
-- Related:
-  - [`@typescript-eslint/no-invalid-this`](../typescript/base.md#no-invalid-this)
 
-The base rule has too many false positives, because many callbacks are called with a valid `this`:
+This rule has too many false positives, because many callbacks are called with a valid `this`:
 
 ```ts
 JSON.parse(str, function (key, value) {
@@ -371,6 +373,11 @@ JSON.parse(str, function (key, value) {
   return value.replace(/\{\{name\}\}/g, this.name);
 });
 ```
+
+Even in TypeScript files, we don't need this rule, because this rule falls into a dilemma:
+
+- In TypeScript files, its utility clashes exactly with the TypeScript compiler if one adds the `this` parameter anyway;
+- In JavaScript files, it does not prevent any additional false positives.
 
 ### [`no-useless-call`](https://eslint.org/docs/rules/no-useless-call)
 

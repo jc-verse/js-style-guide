@@ -1,6 +1,6 @@
-import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
 
-export default tseslint.config({
+export default defineConfig({
   rules: {
     // https://jc-verse.github.io/js-style-guide/typescript/type-checked#await-thenable
     "@typescript-eslint/await-thenable": "error",
@@ -33,6 +33,7 @@ export default tseslint.config({
       {
         ignoreArrowShorthand: true,
         ignoreVoidOperator: false,
+        ignoreVoidReturningFunctions: false,
       },
     ],
 
@@ -78,6 +79,9 @@ export default tseslint.config({
 
     "@typescript-eslint/no-unsafe-return": "error",
 
+    // TODO: investigate enabling
+    "@typescript-eslint/no-unsafe-type-assertion": "off",
+
     "@typescript-eslint/non-nullable-type-assertion-style": "error",
 
     "@typescript-eslint/prefer-includes": "error",
@@ -105,6 +109,9 @@ export default tseslint.config({
 
     // Not useful. Sometimes we intentionally make the function non-async.
     "@typescript-eslint/promise-function-async": "off",
+
+    // Allow flexible API design
+    "@typescript-eslint/related-getter-setter-pairs": "off",
 
     "@typescript-eslint/require-array-sort-compare": "error",
 

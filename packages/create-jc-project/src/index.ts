@@ -172,9 +172,8 @@ await fs.writeFile(".eslintrc", `${JSON.stringify(eslintRC, null, 2)}\n`);
 await fs.writeFile("tsconfig.json", `${JSON.stringify(tsconfig, null, 2)}\n`);
 
 // This often fails. Let's try multiple times.
-exec("yarn set version stable", { times: 3 });
-exec(`yarn add -D ${dependencies.sort().join(" ")}`);
+exec(`bun add -D ${dependencies.sort().join(" ")}`);
 exec("git init");
-exec("yarn prepare");
+exec("bun prepare");
 exec("git add .");
 exec("git commit -m 'initial commit'");

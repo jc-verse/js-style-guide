@@ -1,8 +1,8 @@
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
 import reactPlugin from "eslint-plugin-react";
-import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
 
-export default tseslint.config({
+export default defineConfig({
   plugins: {
     "jsx-a11y": jsxA11yPlugin,
     react: reactPlugin,

@@ -13,6 +13,8 @@ This page introduces rules related to modules, such as import/exports.
 ### [`no-import-assign`](https://eslint.org/docs/rules/no-import-assign)
 
 - Severity: error
+- Related:
+  - `ts(2632): Cannot assign to 'x' because it is an import.`
 
 Do not assign to imports. This is an error because imported bindings are readonly.
 

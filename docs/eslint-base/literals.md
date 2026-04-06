@@ -46,8 +46,6 @@ Use `0b` and `0o` number literals instead of `parseInt` with a static string.
 ### [`radix`](https://eslint.org/docs/rules/radix)
 
 - Severity: error
-- Configuration:
-  - Always require a radix (`"always"`)
 
 You should always use `parseInt` with a radix. This prevents accidental behavior inconsistencies when the string starts with `0` or `0x`. If you intentionally want to accommodate many number formats, use the `Number` constructor instead.
 

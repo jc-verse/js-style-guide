@@ -1,6 +1,6 @@
-import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
 
-export default tseslint.config({
+export default defineConfig({
   rules: {
     // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#accessor-pairs
     "accessor-pairs": [
@@ -18,7 +18,7 @@ export default tseslint.config({
       {
         allowImplicit: false,
         checkForEach: false,
-        // Note: allowVoid: true is implied by checkForEach: false
+        // Note: allowVoid doesn't do anything with checkForEach: false
       },
     ],
 
@@ -85,7 +85,7 @@ export default tseslint.config({
     // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#default-case-last
     "default-case-last": "error",
 
-    // Shadowed by TS-ESLint rule
+    // Only enabled in TypeScript
     // https://jc-verse.github.io/js-style-guide/eslint-base/functions#default-param-last
     "default-param-last": "off",
 
@@ -100,14 +100,22 @@ export default tseslint.config({
 
     // We rarely use function expressions.
     // https://jc-verse.github.io/js-style-guide/eslint-base/functions#func-name-matching
-    "func-name-matching": ["warn", "always"],
+    "func-name-matching": [
+      "warn",
+      "always",
+      { considerPropertyDescriptor: true, includeCommonJSModuleExports: false },
+    ],
 
     // We rarely use function expressions.
     // https://jc-verse.github.io/js-style-guide/eslint-base/functions#func-names
     "func-names": ["warn", "as-needed"],
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/functions#func-style
-    "func-style": ["warn", "declaration", { allowArrowFunctions: true }],
+    "func-style": [
+      "warn",
+      "declaration",
+      { allowArrowFunctions: true, allowTypeAnnotation: false },
+    ],
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#getter-return
     "getter-return": ["error", { allowImplicit: false }],
@@ -129,7 +137,6 @@ export default tseslint.config({
     // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#id-match
     "id-match": "off",
 
-    // Shadowed by TS-ESLint rule; this is for JS only
     // Otherwise one can write `let a: string;` which can be problematic.
     // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#init-declarations
     "init-declarations": ["error", "always"],
@@ -186,7 +193,6 @@ export default tseslint.config({
     // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-alert
     "no-alert": "error",
 
-    // Shadowed by TS-ESLint rule
     // https://jc-verse.github.io/js-style-guide/eslint-base/collections#no-array-constructor
     "no-array-constructor": "error",
 
@@ -216,7 +222,7 @@ export default tseslint.config({
     "no-compare-neg-zero": "error",
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-cond-assign
-    "no-cond-assign": ["error", "except-parens"],
+    "no-cond-assign": ["error", "always"],
 
     // In projects with a wrapped logger, this can be enabled
     // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-console
@@ -230,7 +236,7 @@ export default tseslint.config({
     "no-constant-binary-expression": "error",
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-constant-condition
-    "no-constant-condition": ["error", { checkLoops: true }],
+    "no-constant-condition": ["error", { checkLoops: "all" }],
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-constructor-return
     "no-constructor-return": "error",
@@ -408,7 +414,7 @@ export default tseslint.config({
     "no-magic-numbers": "off",
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-misleading-character-class
-    "no-misleading-character-class": "error",
+    "no-misleading-character-class": ["error", { allowEscape: true }],
 
     // For aesthetic reasons, because Prettier formats chained assignments quite
     // ugly.
@@ -437,9 +443,6 @@ export default tseslint.config({
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-new-native-nonconstructor
     "no-new-native-nonconstructor": "error",
-
-    // Predated by no-new-native-nonconstructor and will be deprecated
-    "no-new-symbol": "off",
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-new-wrappers
     "no-new-wrappers": "error",
@@ -613,12 +616,14 @@ export default tseslint.config({
         allow: [],
         builtinGlobals: false,
         hoist: "all",
+        ignoreFunctionTypeParameterNameValueShadow: false,
         ignoreOnInitialization: true,
+        ignoreTypeValueShadow: true,
       },
     ],
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-shadow-restricted-names
-    "no-shadow-restricted-names": "error",
+    "no-shadow-restricted-names": ["error", { reportGlobalThis: true }],
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/collections#no-sparse-arrays
     "no-sparse-arrays": "error",
@@ -635,6 +640,9 @@ export default tseslint.config({
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-throw-literal
     "no-throw-literal": "error",
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-unassigned-vars
+    "no-unassigned-vars": "error",
 
     // We also check for `typeof`, because it simply doesn't make sense
     // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-undef
@@ -693,6 +701,8 @@ export default tseslint.config({
         allowTaggedTemplates: true,
         allowTernary: true,
         enforceForJSX: true,
+        // Only for completeness; the parser already strips directives in ES5+
+        ignoreDirectives: true,
       },
     ],
 
@@ -711,7 +721,9 @@ export default tseslint.config({
       {
         args: "after-used",
         caughtErrors: "all",
+        ignoreClassWithStaticInitBlock: false,
         ignoreRestSiblings: true,
+        ignoreUsingDeclarations: false,
         vars: "all",
       },
     ],
@@ -722,7 +734,10 @@ export default tseslint.config({
       {
         allowNamedExports: true,
         classes: true,
+        enums: false,
         functions: false,
+        ignoreTypeReferences: true,
+        typedefs: false,
         variables: true,
       },
     ],
@@ -745,7 +760,6 @@ export default tseslint.config({
     // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-useless-concat
     "no-useless-concat": "error",
 
-    // Shadowed by TS-ESLint rule
     // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-useless-constructor
     "no-useless-constructor": "error",
 
@@ -840,12 +854,15 @@ export default tseslint.config({
     // https://jc-verse.github.io/js-style-guide/eslint-base/literals#prefer-template
     "prefer-template": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#preserve-caught-error
+    "preserve-caught-error": ["error", { requireCatchParameter: false }],
+
     // https://jc-verse.github.io/js-style-guide/eslint-base/literals#radix
-    radix: ["error", "always"],
+    radix: "error",
 
     // There can be false-positives
     // https://jc-verse.github.io/js-style-guide/eslint-base/async#require-atomic-updates
-    "require-atomic-updates": "warn",
+    "require-atomic-updates": ["warn", { allowProperties: false }],
 
     // This can also be a way to help future refactors, where one of the
     // constituents is planned to be made async

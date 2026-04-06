@@ -87,16 +87,6 @@ We don't mind whether `interface` or `type` is used. Generally:
 - Use `interface` for large object types.
 - Use `type` for convenience types that are small.
 
-### [`init-declarations`](https://typescript-eslint.io/rules/init-declarations)
-
-- Severity: error
-- Configuration:
-  - Require variables to be initialized (`"always"`)
-- Related:
-  - [`init-declarations`](../eslint-base/variables-names.md#init-declarations)
-
-See the base rule for more information. This extension rule prevents false positives for TypeScript-specific syntax so it is safe to use in JavaScript files too.
-
 ### [`no-empty-object-type`](https://typescript-eslint.io/rules/no-empty-object-type)
 
 - Severity: warning
@@ -128,22 +118,6 @@ type User = z.infer<typeof User>;
 
 If the rule reports for this case and it really makes sense, you can disable the rule for that line. ([typescript-eslint/typescript-eslint#6441](https://github.com/typescript-eslint/typescript-eslint/issues/6441))
 
-### [`no-shadow`](https://typescript-eslint.io/rules/no-shadow)
-
-- Severity: warning
-- Configuration:
-  - Ignore type declarations and value declarations shadowing each other (`ignoreTypeValueShadowing: true`)
-  - Do not allow function type parameter name to shadow another variable (`ignoreFunctionTypeParameterNameValueShadow: false`)
-
-We allow type declarations and value declarations to shadow each other. This is because they are in different namespaces and you always access each one with a different syntax. However, a function parameter name always lives in value space even when it belongs in a type, so we don't allow it to shadow another variable.
-
-```ts
-const test = 1;
-type Func = (test: string) => typeof test; // What is `test` here?
-```
-
-This rule is safe to use in JavaScript files because it does not change behaviors outside of TypeScript.
-
 ### [`no-unused-vars`](https://typescript-eslint.io/rules/no-unused-vars)
 
 - Severity: error
@@ -152,16 +126,6 @@ This rule is safe to use in JavaScript files because it does not change behavior
 
 See the base rule for more information. This extension rule adds support for TypeScript-specific syntax so it is safe to use in JavaScript files too.
 
-### [`no-use-before-define`](https://typescript-eslint.io/rules/no-use-before-define)
-
-- Severity: warning
-- Configuration:
-  - Check use-before-define enums (`enums: true`)
-  - Allow referencing anything in type space (`ignoreTypeReferences: true`)
-  - Allow all type declarations to be hoisted (`typedefs: false`)
-
-See the base rule for more information. Because types behave like functions, they are safe to be referenced everywhere. However, when enums are used as values, they are not hoisted. This is also checked by TypeScript.
-
 ## Functions
 
 ### [`adjacent-overload-signatures`](https://typescript-eslint.io/rules/adjacent-overload-signatures)
@@ -169,26 +133,6 @@ See the base rule for more information. Because types behave like functions, the
 - Severity: error
 
 We require overload signatures to be adjacent to each other. This makes the signatures of functions easier to read. Note that the rule has a known bug: [typescript-eslint/typescript-eslint#4576](https://github.com/typescript-eslint/typescript-eslint/issues/4576).
-
-### [`default-param-last`](https://typescript-eslint.io/rules/default-param-last)
-
-- Severity: error
-- Disabled in JavaScript
-- Related:
-  - [`default-param-last`](../eslint-base/functions.md#default-param-last)
-
-We disable the base rule but enable the TypeScript version. In TypeScript files, we require default parameters to be at the end of the parameter list. This is because required parameters must be passed values, so optional parameters before them have no effect and should just have `| undefined` in their types. In JavaScript, we don't require this because it is not possible to indicate optionality except through default values.
-
-### [`no-invalid-this`](https://typescript-eslint.io/rules/no-invalid-this)
-
-- Severity: off
-- Related:
-  - [`no-invalid-this`](../eslint-base/functions.md#no-invalid-this)
-
-Even in TypeScript files, we don't need this rule, because this rule falls into a dilemma:
-
-- In TypeScript files, its utility clashes exactly with the TypeScript compiler if one adds the `this` parameter anyway;
-- In JavaScript files, it does not prevent any additional false positives.
 
 ### [`unified-signatures`](https://typescript-eslint.io/rules/unified-signatures)
 
@@ -232,31 +176,11 @@ In case the two overloads have very distinct semantics, name the parameter as `l
 
 Use `const foo = new Foo<T>()` instead of `const foo: Foo<T> = new Foo()`. It is shorter and less prone to refactoring.
 
-### [`no-array-constructor`](https://typescript-eslint.io/rules/no-array-constructor)
-
-- Severity: off
-- Related:
-  - [`no-array-constructor`](../eslint-base/collections.md#no-array-constructor)
-
-We never allow the `Array` constructor. Even in TypeScript, use `[] as T[]` instead of `Array<T>()`.
-
 ### [`no-unnecessary-type-constraint`](https://typescript-eslint.io/rules/no-unnecessary-type-constraint)
 
 - Severity: error
 
 Do not write `T extends unknown` or `T extends any`. They are completely redundant as of the latest TS version (`T extends unknown` may not be in older versions when generic types were non-nullable by default).
-
-### [`no-unused-expressions`](https://typescript-eslint.io/rules/no-unused-expressions)
-
-- Severity: error
-- Related:
-  - [`no-unused-expressions`](../eslint-base/control-flow.md#no-unused-expressions)
-
-See the base rule for more information. This extension rule is useful for TypeScript because it adds support for instantiation expressions. It is safe to use in JavaScript files because it does not change behaviors outside of TypeScript.
-
-```ts
-foo<T>;
-```
 
 ## Classes
 
@@ -279,14 +203,6 @@ Note that our [`accessor-pairs`](../eslint-base/objects-classes.md#accessor-pair
 - Severity: off
 
 Never annotate member accessibility. If you want private members, use `#` instead of `private`. Public fields are allowed and not discouraged or unfavored over accessors.
-
-### [`no-dupe-class-members`](https://typescript-eslint.io/rules/no-dupe-class-members)
-
-- Severity: error
-- Related:
-  - [`no-dupe-class-members`](../eslint-base/objects-classes.md#no-dupe-class-members)
-
-This rule overrides the base rule to allow overloads. It is safe to use in JavaScript files because it does not change behaviors outside of TypeScript.
 
 ### [`no-extraneous-class`](https://typescript-eslint.io/rules/no-extraneous-class)
 

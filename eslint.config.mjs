@@ -1,21 +1,16 @@
 // @ts-check
 
 import jcRules from "eslint-config-jc";
+import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
 
-export default tseslint.config(
+export default defineConfig(
   ...jcRules({
     node: true,
     react: true,
   }),
   {
-    ignores: [
-      "node_modules",
-      ".yarn",
-      "**/dist/",
-      "**/build/",
-      "**/.docusaurus/",
-    ],
+    ignores: ["node_modules", "**/dist/", "**/build/", "**/.docusaurus/"],
   },
   {
     languageOptions: {

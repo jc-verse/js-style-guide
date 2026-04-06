@@ -43,7 +43,7 @@ To get everything configured, you need the following files:
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn lint-staged --allow-empty
+bun lint-staged --allow-empty
 ```
 
 </TabItem>
@@ -105,7 +105,7 @@ yarn lint-staged --allow-empty
       "noSuggest": true
     }
   ],
-  "ignorePaths": ["package.json", "yarn.lock", "project-words.txt"]
+  "ignorePaths": ["package.json", "bun.lock", "project-words.txt"]
 }
 ```
 
@@ -115,13 +115,13 @@ yarn lint-staged --allow-empty
 Then, you need to install some dependencies:
 
 ```bash
-yarn add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser cspell eslint eslint-config-jc eslint-plugin-header eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks husky lint-staged prettier prettier-config-jc tsconfig-jc typescript
+bun add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser cspell eslint eslint-config-jc eslint-plugin-header eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks husky lint-staged prettier prettier-config-jc tsconfig-jc typescript
 ```
 
 That's a lot of things to do. Fear not—we have a scaffolding utility to set everything up. Run:
 
 ```bash
-yarn create jc-project
+bun create jc-project
 ```
 
 And you should be finished.

@@ -34,10 +34,8 @@ Note that this rule can still false-positive when calling a method on a non-arra
 ### [`no-array-constructor`](https://eslint.org/docs/rules/no-array-constructor)
 
 - Severity: error
-- Related:
-  - `@typescript-eslint/no-array-constructor`
 
-We disallow the use of `Array()` because you should always prefer array literals. Even in the case of `Array<T>()`, you should generally use `[] as T[]` instead.
+We disallow the use of `Array()` because you should always prefer array literals. Even in the case of `Array<T>()`, you should generally use `[] as T[]` or `[] satisfies T[]` instead.
 
 ### [`no-sparse-arrays`](https://eslint.org/docs/rules/no-sparse-arrays)
 

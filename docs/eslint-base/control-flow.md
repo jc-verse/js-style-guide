@@ -42,7 +42,7 @@ This rule only reports where the block is absolutely unnecessary (when it does n
 
 - Severity: error
 - Configuration:
-  - Disallow constant conditions in loops (`checkLoops: true`)
+  - Disallow constant conditions in all loops, including `while (true)` (`checkLoops: "all"`)
 
 Constant conditions that always evaluate to truthy or falsy can be refactoring artifacts. In addition, infinite loops are also forbidden to prompt developers to consider alternatives like explicit exit conditions instead of `break` statements, or `setInterval`.
 
@@ -344,6 +344,22 @@ try {
 }
 ```
 
+### [`preserve-caught-error`](https://eslint.org/docs/rules/preserve-caught-error)
+
+- Severity: error
+- Configuration:
+  - Allow ignoring original error (`requireCatchParameter: false`)
+
+When re-throwing an error in the `catch` block, always attach the original error as the `cause` instead of just incorporating its message/stack.
+
+```ts
+try {
+  doSomething();
+} catch (err) {
+  throw new Error("Error while doing something", { cause: err });
+}
+```
+
 ## Labels
 
 ### [`no-extra-label`](https://eslint.org/docs/rules/no-extra-label)
@@ -408,8 +424,7 @@ Unreachable code is always a mistake. Furthermore, TypeScript gives up on contro
   - Allow ternary expressions (`allowTernary: true`)
   - Allow tagged templates (`allowTaggedTemplates: true`)
   - Disallow unused JSX expressions (`enforceForJSX: true`)
-- Related:
-  - [`@typescript-eslint/no-unused-expressions`](../typescript/base.md#no-unused-expressions)
+  - Allow directives (`ignoreDirectives: true`), but just for the sake of completeness because the parser already strips them in ES5+.
 
 Every expression statement must have some side-effect. We allow only the following expressions as statements:
 
