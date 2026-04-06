@@ -81,7 +81,7 @@ const packageJSON = {
     format: "prettier -w .",
     lint: 'eslint "**/*.{js,ts,jsx,tsx}"',
     spellcheck: 'cspell "**" --no-progress',
-    prepare: "husky install",
+    prepare: "husky",
   },
 };
 
